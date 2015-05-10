@@ -1,0 +1,49 @@
+{% extends 'HBBlogBundle::layout.html.twig' %}
+
+{%  block content -%}
+    {% for article in pagination %}
+
+        <article class="article">
+            <h1>{{article.title}}</h1>
+
+            <p class="article_infos">
+                ajouté le {{article.creationDate|date('d/m/Y')}} par {{article.author.username}}
+            </p>
+
+            <p class="article_extrait">
+
+                {% if article.content|length >article_max_length %}
+                    {{article.content|slice(0,article_max_length)~'...'}}
+                    <a href="{{path("blog_article_slug",{slug:article.slug})}}">Lire la suit....</a>
+                {% else %}
+                    {{article.content}}
+                {% endif %}
+            </p>
+
+        </article>
+    {% else %}
+        article afficher
+
+    {% endfor %}
+
+    {# display navigation #}
+    <div class="navigation">
+        {{ knp_pagination_render(pagination) }}
+    </div>
+
+    {{dump(pagination)}}
+{%endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{asset ("bundles/hbblog/js/homepage.js")}}"> </script>
+   {# <script>
+
+        $(function () {
+            //alert("coucou");
+            $('h1').css('color', 'red');
+            $('p').css('color', 'blue');
+        });
+
+    </script>#}
+{% endblock %}

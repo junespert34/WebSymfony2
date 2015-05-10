@@ -1,0 +1,60 @@
+{% extends 'HBBlogBundle::layout.html.twig' %}
+
+
+{% block content -%}
+    <h1>Article</h1>
+    
+    <table class="record_properties">
+        <tbody>
+            
+            <tr>
+                <th>Title</th>
+                <td>{{ article.title }}</td>
+            </tr>
+            <tr>
+                <th>Content</th>
+                <td>{{ article.content }}</td>
+            </tr>
+            <tr>
+                <th>Creationdate</th>
+                <td>{{ article.creationDate|date('Y-m-d H:i:s') }}</td>
+            </tr>
+            <tr>
+                <th>Lasteditdate</th>
+                <td>{{ article.lastEditDate|date('Y-m-d H:i:s') }}</td>
+            </tr>
+            <tr>
+                <th>Publishdate</th>
+                <td>{{article.publishDate|date('Y-m-d H:i:s') }}</td>
+            </tr>
+            <tr>
+                <th>Published</th>
+                <td>{{ article.published }}</td>
+            </tr>
+            <tr>
+                <th>Enabled</th>
+                <td>{{ article.enabled }}</td>
+            </tr>
+            <tr>
+                <th>Nom de l'auteur</th>
+                <td>{{ article.author.username }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+        <ul class="record_actions">
+    <li>
+        <a href="{{ path('article') }}">
+            Back to the list
+        </a>
+    </li>
+    
+     <li>
+        <a href="{{ path('article_edit',{'id':article.id}) }}">
+            Edit
+        </a>
+    </li>
+    
+</ul>
+{% endblock %}
+
